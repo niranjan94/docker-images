@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
+script:
+  - docker build -t niranjan94/nginx-nodejs:${TRAVIS_TAG:-'edge'} nginx-nodejs
+
+after_success:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  - docker push niranjan94/nginx-nodejs;
